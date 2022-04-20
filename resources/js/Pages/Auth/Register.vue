@@ -7,12 +7,18 @@ import BreezeValidationErrors from '@/Components/ValidationErrors.vue';
 import { Head, Link, useForm } from '@inertiajs/inertia-vue3';
 
 const form = useForm({
-    name: '',
+    first_name: '',
+    middle_name: '',
+    last_name: '',
     email: '',
     password: '',
     password_confirmation: '',
     terms: false,
 });
+
+defineProps({
+    roles: Object,
+})
 
 const submit = () => {
     form.post(route('register'), {
@@ -24,41 +30,6 @@ const submit = () => {
 <template>
     <BreezeGuestLayout>
         <Head title="Register" />
-
-        <BreezeValidationErrors class="mb-4" />
-
-        <form @submit.prevent="submit">
-            <div>
-                <BreezeLabel for="name" value="Name" />
-                <BreezeInput id="name" type="text" class="mt-1 block w-full" v-model="form.name" required autofocus autocomplete="name" />
-            </div>
-
-            <div class="mt-4">
-                <BreezeLabel for="email" value="Email" />
-                <BreezeInput id="email" type="email" class="mt-1 block w-full" v-model="form.email" required autocomplete="username" />
-            </div>
-
-            <div class="mt-4">
-                <BreezeLabel for="password" value="Password" />
-                <BreezeInput id="password" type="password" class="mt-1 block w-full" v-model="form.password" required autocomplete="new-password" />
-            </div>
-
-            <div class="mt-4">
-                <BreezeLabel for="password_confirmation" value="Confirm Password" />
-                <BreezeInput id="password_confirmation" type="password" class="mt-1 block w-full" v-model="form.password_confirmation" required autocomplete="new-password" />
-            </div>
-
-            <div class="flex items-center justify-end mt-4">
-                <Link :href="route('login')" class="underline text-sm text-gray-600 hover:text-gray-900">
-                    Already registered?
-                </Link>
-
-                <BreezeButton class="ml-4" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
-                    Register
-                </BreezeButton>
-            </div>
-        </form>
-
         <div class="container py-2">
             <br><br><br><br>
             <div class="row justify-content-center">
@@ -67,6 +38,7 @@ const submit = () => {
                         <h5>Register</h5>
                         <hr class="m-0">
                         <div class="card-body">
+                            <BreezeValidationErrors class="mb-4" />
                             <form @submit.prevent="submit">
 
                                 <div class="form-group row">
@@ -76,106 +48,68 @@ const submit = () => {
                                         <select id="role" name="role"
                                             class="form-control" required>
                                             <option></option>
-                                            @foreach ($roles as $role)
-                                            <option value="{{$role->id}}">{{$role->name}}</option>
-                                            @endforeach
+                                            <option v-for="role in roles" :key="role.id" value="{{role.id}}">{{role.name}}</option>
                                         </select>
-
-                                        @error('role')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
                                     </div>
                                 </div>
                                 
                                 <div class="form-group row">
-                                    <label for="first_name" class="col-md-4 col-form-label text-md-right">{{ __('First Name') }}</label>
+                                    <BreezeLabel for="first_name" class="col-md-4 col-form-label text-md-right" value="First Name" />
 
                                     <div class="col-md-6">
-                                        <input id="first_name" type="text" class="form-control @error('first_name') is-invalid @enderror" name="first_name" value="{{ old('first_name') }}" required autocomplete="first_name" autofocus>
-
-                                        @error('first_name')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
+                                        <BreezeInput id="first_name" type="text" class="mt-1 block w-full" v-model="form.first_name" required autofocus autocomplete="first_name" />
                                     </div>
                                 </div>
 
                                 <div class="form-group row">
-                                    <label for="middle_name" class="col-md-4 col-form-label text-md-right">{{ __('Middle Name') }}</label>
+                                    <BreezeLabel for="middle_name" class="col-md-4 col-form-label text-md-right" value="Middle Name" />
 
                                     <div class="col-md-6">
-                                        <input id="middle_name" type="text" class="form-control @error('middle_name') is-invalid @enderror" name="middle_name" value="{{ old('middle_name') }}" required autocomplete="middle_name">
-
-                                        @error('middle_name')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
+                                        <BreezeInput id="middle_name" type="text" class="mt-1 block w-full" v-model="form.middle_name" required autofocus autocomplete="middle_name" />
                                     </div>
                                 </div>
 
                                 <div class="form-group row">
-                                    <label for="last_name" class="col-md-4 col-form-label text-md-right">{{ __('Last Name') }}</label>
+                                    <BreezeLabel for="last_name" class="col-md-4 col-form-label text-md-right" value="Last Name" />
 
                                     <div class="col-md-6">
-                                        <input id="last_name" type="text" class="form-control @error('last_name') is-invalid @enderror" name="last_name" value="{{ old('last_name') }}" required autocomplete="last_name">
-
-                                        @error('last_name')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
+                                        <BreezeInput id="last_name" type="text" class="mt-1 block w-full" v-model="form.last_name" required autofocus autocomplete="last_name" />
                                     </div>
                                 </div>
 
                                 <div class="form-group row">
-                                    <label for="email" class="col-sm-4 col-form-label text-md-right">{{ __('Email') }}</label>
+                                    <BreezeLabel for="email" class="col-sm-4 col-form-label text-md-right" value="Email" />
 
                                     <div class="col-md-6">
-                                        <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required>
-
-                                        @if ($errors->has('email'))
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $errors->first('email') }}</strong>
-                                            </span>
-                                        @endif
+                                        <BreezeInput id="email" type="email" class="mt-1 block w-full" v-model="form.email" required autocomplete="username" />
                                     </div>
                                 </div>
 
                                 <div class="form-group row">
-                                    <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
+                                    <BreezeLabel for="password" class="col-md-4 col-form-label text-md-right" value="Password" />
 
                                     <div class="col-md-6">
-                                        <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
-
-                                        @error('password')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                        @enderror
+                                        <BreezeInput id="password" type="password" class="mt-1 block w-full" v-model="form.password" required autocomplete="new-password" />
                                     </div>
                                 </div>
 
                                 <div class="form-group row">
-                                    <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
+                                    <BreezeLabel for="password_confirmation" class="col-md-4 col-form-label text-md-right" value="Confirm Password" />
 
                                     <div class="col-md-6">
-                                        <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
+                                        <BreezeInput id="password_confirmation" type="password" class="mt-1 block w-full" v-model="form.password_confirmation" required autocomplete="new-password" />
                                     </div>
                                 </div>
 
                                 <div class="form-group row mb-0">
                                     <div class="col-md-8 offset-md-4">
-                                        <button type="submit" class="btn btn-primary">
-                                            {{ __('Register') }}
-                                        </button>
+                                        <BreezeButton class="ml-4 btn btn-primary" :class="{ 'opacity-25': form.processing }" :disabled="form.processing">
+                                            Register
+                                        </BreezeButton>
 
-                                        <a class="btn btn-link" href="{{ route('login') }}">
-                                            {{ __('Already registered?') }}
-                                        </a>
+                                        <Link :href="route('login')" class="btn btn-link">
+                                            Already registered?
+                                        </Link>
                                     </div>
                                 </div>
                             </form>
