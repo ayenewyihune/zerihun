@@ -29,4 +29,5 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 try {
     require('chart.js');
     require('admin-lte');
+    require('@fortawesome/fontawesome-free/js/all.min.js');
 } catch (e) {}

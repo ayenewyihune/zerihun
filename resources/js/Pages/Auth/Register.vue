@@ -7,6 +7,7 @@ import BreezeValidationErrors from '@/Components/ValidationErrors.vue';
 import { Head, Link, useForm } from '@inertiajs/inertia-vue3';
 
 const form = useForm({
+    role: '',
     first_name: '',
     middle_name: '',
     last_name: '',
@@ -18,7 +19,7 @@ const form = useForm({
 
 defineProps({
     roles: Object,
-})
+});
 
 const submit = () => {
     form.post(route('register'), {
@@ -45,10 +46,10 @@ const submit = () => {
                                     <BreezeLabel for="role" class="col-md-4 col-form-label text-md-right" value="Role" />
 
                                     <div class="col-md-6">
-                                        <select id="role" name="role"
+                                        <select id="role" name="role" v-model="form.role"
                                             class="form-control" required>
                                             <option></option>
-                                            <option v-for="role in roles" :key="role.id" value="{{role.id}}">{{role.name}}</option>
+                                            <option v-for="role in roles" :key="role.id" :value="role.id">{{role.name}}</option>
                                         </select>
                                     </div>
                                 </div>
@@ -57,7 +58,7 @@ const submit = () => {
                                     <BreezeLabel for="first_name" class="col-md-4 col-form-label text-md-right" value="First Name" />
 
                                     <div class="col-md-6">
-                                        <BreezeInput id="first_name" type="text" class="mt-1 block w-full" v-model="form.first_name" required autofocus autocomplete="first_name" />
+                                        <BreezeInput id="first_name" type="text" class="mt-1 block w-full" v-model="form.first_name" required autocomplete="first_name" />
                                     </div>
                                 </div>
 
@@ -65,7 +66,7 @@ const submit = () => {
                                     <BreezeLabel for="middle_name" class="col-md-4 col-form-label text-md-right" value="Middle Name" />
 
                                     <div class="col-md-6">
-                                        <BreezeInput id="middle_name" type="text" class="mt-1 block w-full" v-model="form.middle_name" required autofocus autocomplete="middle_name" />
+                                        <BreezeInput id="middle_name" type="text" class="mt-1 block w-full" v-model="form.middle_name" required autocomplete="middle_name" />
                                     </div>
                                 </div>
 
@@ -73,7 +74,7 @@ const submit = () => {
                                     <BreezeLabel for="last_name" class="col-md-4 col-form-label text-md-right" value="Last Name" />
 
                                     <div class="col-md-6">
-                                        <BreezeInput id="last_name" type="text" class="mt-1 block w-full" v-model="form.last_name" required autofocus autocomplete="last_name" />
+                                        <BreezeInput id="last_name" type="text" class="mt-1 block w-full" v-model="form.last_name" required autocomplete="last_name" />
                                     </div>
                                 </div>
 

@@ -661,6 +661,9 @@ select {
 .z-50 {
   z-index: 50;
 }
+.float-right {
+  float: right;
+}
 .m-1 {
   margin: 0.25rem;
 }
@@ -739,6 +742,9 @@ select {
 }
 .inline-flex {
   display: inline-flex;
+}
+.table {
+  display: table;
 }
 .grid {
   display: grid;
@@ -978,6 +984,14 @@ select {
   padding-top: 1.5rem;
   padding-bottom: 1.5rem;
 }
+.py-3 {
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+}
+.px-0 {
+  padding-left: 0px;
+  padding-right: 0px;
+}
 .py-12 {
   padding-top: 3rem;
   padding-bottom: 3rem;
@@ -1014,6 +1028,9 @@ select {
 }
 .text-center {
   text-align: center;
+}
+.text-right {
+  text-align: right;
 }
 .font-sans {
   font-family: Nunito, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";

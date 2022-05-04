@@ -9,10 +9,9 @@ defineProps({
 </script>
 
 <template>
-
+    <Head title="Home" />
     <GuestLayout>
         <div class="container py-1">
-
             <div class="row">
                 <div class="col-lg-8 offset-lg-2">
                     <br><br><br><br><br><br><br>
@@ -27,7 +26,7 @@ defineProps({
                                 <p>Go to your dashboard</p>
                                 <div class="text-center">
                                     <Link href="/about" class="px-3 m-1 btn btn-primary">About</Link>
-                                    <Link href="/dashboard" class="px-3 m-1 btn btn-outline-primary">Dashboard</Link>
+                                    <Link href="/dashboard/projects/list" class="px-3 m-1 btn btn-outline-primary">Dashboard</Link>
                                 </div>
                             </div>
                             <div v-else>
